@@ -14,19 +14,19 @@
       <nav>
         <ul>
           <li>
-            <a href="#"><h1>Novidades</h1></a>
+            <a href="#" id="btn-todos"><h1>Novidades</h1></a>
           </li>
           <li>
-            <a href="#"><h1>Colares</h1></a>
+            <a href="#" id="btn-colares"><h1>Colares</h1></a>
           </li>
           <li>
-            <a href="#"><h1>Brincos</h1></a>
+            <a href="#" id="btn-brincos"><h1>Brincos</h1></a>
           </li>
           <li>
-            <a href="#"><h1>Pulseiras</h1></a>
+            <a href="#" id="btn-pulseiras"><h1>Pulseiras</h1></a>
           </li>
           <li>
-            <a href="#"><h1>Contato</h1></a>
+            <a href="#" id="btn-contato"><h1>Contato</h1></a>
           </li>
         </ul>
       </nav>
@@ -222,4 +222,62 @@
       </p>
     </footer>
   </body>
+
+<script>
+  function filtrarProdutos(categoria) {
+    const produtos = document.querySelectorAll(".produto");
+    produtos.forEach((produto) => {
+      const descricao = produto.querySelector("p").innerText.toLowerCase();
+      if (categoria === "todos" || descricao.includes(categoria)) {
+        produto.style.display = "block";
+      } else {
+        produto.style.display = "none";
+      }
+    });
+  }
+
+  function rolarSuavementePara(elemento) {
+    const distanciaTopo = elemento.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({
+      top: distanciaTopo - 50, // pequeno ajuste para não colar no topo
+      behavior: "smooth"
+    });
+  }
+
+  function aplicarFiltroComScroll(categoria) {
+    filtrarProdutos(categoria);
+    // Espera um pouco para o layout se ajustar antes de rolar
+    setTimeout(() => {
+      const secao = document.querySelector(".destaques");
+      rolarSuavementePara(secao);
+    }, 100);
+  }
+
+  document.getElementById("btn-todos").addEventListener("click", (e) => {
+    e.preventDefault();
+    aplicarFiltroComScroll("todos");
+  });
+
+  document.getElementById("btn-colares").addEventListener("click", (e) => {
+    e.preventDefault();
+    aplicarFiltroComScroll("colar");
+  });
+
+  document.getElementById("btn-brincos").addEventListener("click", (e) => {
+    e.preventDefault();
+    aplicarFiltroComScroll("brinco");
+  });
+
+  document.getElementById("btn-pulseiras").addEventListener("click", (e) => {
+    e.preventDefault();
+    aplicarFiltroComScroll("pulseira");
+  });
+
+  document.getElementById("btn-contato").addEventListener("click", (e) => {
+    e.preventDefault();
+    const contato = document.querySelector("#vendas");
+    rolarSuavementePara(contato);
+  });
+</script>
+
 </html>
