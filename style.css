@@ -171,6 +171,20 @@ section {
   transition: background-color 0.3s ease;
 }
 
+/* Efeito hover no desktop */
+.botao-link:hover {
+  background-color: #ff1493;
+}
+
+/* Responsivo: adapta o botão em telas pequenas */
+@media (max-width: 600px) {
+  .botao-link {
+    width: 90%;
+    font-size: 18px;
+    padding: 14px;
+  }
+}
+
 .botao-link:hover {
   background-color: #ff1493; /* rosa escuro ao passar o mouse */
 }
